@@ -18,6 +18,7 @@ export default function ReviewsHero() {
     },
   };
 
+  //   variants={blobVariant}
   return (
     <section className="relative pt-32 pb-20 px-6 overflow-hidden">
       {/* Background Floating Shapes */}
@@ -27,7 +28,7 @@ export default function ReviewsHero() {
         className="absolute top-20 left-[-10%] w-64 h-64 bg-purple-100/60 rounded-full blur-3xl -z-10"
       />
       <motion.div
-        variants={blobVariant}
+      
         animate="animate"
         transition={{ delay: 1 }} // Offset animation
         className="absolute bottom-10 right-[-5%] w-80 h-80 bg-blue-100/50 rounded-full blur-3xl -z-10"
