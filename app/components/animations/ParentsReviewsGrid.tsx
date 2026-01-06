@@ -16,7 +16,7 @@ const reviews = [
   { id: 6, name: "Michael P.", child: "Lily, Age 5", img: sakina, quote: "Joyful, engaging, and effective. Highly recommend!" },
 ];
 
-// 2. Apply Variants type to containerVariants
+// 2. Add the : Variants type here
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
@@ -27,7 +27,7 @@ const containerVariants: Variants = {
   },
 };
 
-// 3. Apply Variants type to itemVariants (This fixes the error)
+// 3. Add the : Variants type here
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30, scale: 0.95 },
   show: { 
@@ -35,7 +35,7 @@ const itemVariants: Variants = {
     y: 0, 
     scale: 1, 
     transition: { 
-      type: "spring", // TypeScript now knows this is a valid Animation Type
+      type: "spring", // TypeScript now validates this correctly
       stiffness: 100 
     } 
   },
