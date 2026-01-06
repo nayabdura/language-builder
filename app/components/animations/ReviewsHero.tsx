@@ -23,7 +23,7 @@ export default function ReviewsHero() {
     <section className="relative pt-32 pb-20 px-6 overflow-hidden">
       {/* Background Floating Shapes */}
       <motion.div
-        variants={blobVariant}
+       // variants={blobVariant}
         animate="animate"
         className="absolute top-20 left-[-10%] w-64 h-64 bg-purple-100/60 rounded-full blur-3xl -z-10"
       />
