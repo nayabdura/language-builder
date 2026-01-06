@@ -51,7 +51,7 @@ export default function FeaturedTestimonials() {
                     ))}
                 </div>
               <h3 className="text-2xl font-bold text-[#1a1f2d] mb-4 leading-tight">{item.title}</h3>
-              <blockquote className="text-[#5e626f] text-lg leading-relaxed mb-6">"{item.quote}"</blockquote>
+              <blockquote className="text-[#5e626f] text-lg leading-relaxed mb-6"> &ldquo;{item.quote}&rdquo;</blockquote>
               <div>
                 <p className="font-bold text-[#1a1f2d] text-lg">{item.parent}</p>
                 <p className="text-purple-600 font-medium">{item.child}</p>
