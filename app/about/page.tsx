@@ -1,4 +1,4 @@
-import AboutIntroOverlay from "../components/animations/AboutIntroOverlay";
+import AboutClient from "./AboutClient";
 import { 
   AboutHero, 
   MissionVision, 
@@ -15,15 +15,13 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white">
-      {/* Animation Overlays */}
-      <AboutIntroOverlay />
-      
-      {/* Page Sections */}
-      <AboutHero />
-      <MissionVision />
-      <TeachersSection />
-      <WhyUs />
-      <AboutCTA />
+      <AboutClient>
+        <AboutHero />
+        <MissionVision />
+        <TeachersSection />
+        <WhyUs />
+        <AboutCTA />
+      </AboutClient>
     </main>
   );
 }

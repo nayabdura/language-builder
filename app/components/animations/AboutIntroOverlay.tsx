@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
@@ -6,7 +6,7 @@ interface IntroOverlayProps {
   onComplete: () => void;
 }
 
-export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
+export default function AboutIntroOverlay({ onComplete }: IntroOverlayProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const text1Ref = useRef<HTMLHeadingElement>(null);
   const text2Ref = useRef<HTMLParagraphElement>(null);
@@ -17,24 +17,24 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
         onComplete: () => onComplete(),
       });
 
-      // Step 1: Initial Black Screen (1s delay built into timeline)
+      // 1. Ensure container is visible initially
       tl.set(containerRef.current, { opacity: 1 })
         
-        // Step 2: First Text Animation
+        // 2. First Text Animation (Building Language...)
         .fromTo(text1Ref.current, 
-          { opacity: 0, scale: 0.9 }, 
-          { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out", delay: 1 }
+          { opacity: 0, scale: 0.9, y: 10 }, 
+          { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power2.out", delay: 0.5 }
         )
-        .to(text1Ref.current, { opacity: 0, duration: 0.8, ease: "power2.in" }, "+=0.5")
+        .to(text1Ref.current, { opacity: 0, duration: 0.8, ease: "power2.in" }, "+=0.8")
 
-        // Step 3: Second Text Animation
+        // 3. Second Text Animation (Meet the educators...)
         .fromTo(text2Ref.current, 
           { opacity: 0, y: 20 }, 
-          { opacity: 1, y: 0, duration: 1.5, ease: "power3.out" }
+          { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" }
         )
         .to(text2Ref.current, { opacity: 0, duration: 0.8, ease: "power2.in" }, "+=1")
 
-        // Step 4: Exit Overlay
+        // 4. Exit Overlay smoothly
         .to(containerRef.current, { 
           opacity: 0, 
           duration: 1, 
@@ -49,20 +49,21 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
   return (
     <div 
       ref={containerRef} 
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black px-6 text-center"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black px-6 text-center pointer-events-none"
     >
-      <div className="relative">
+      <div className="relative w-full max-w-4xl">
+        {/* We use absolute positioning to prevent text jumping when one disappears */}
         <h1 
           ref={text1Ref} 
-          className="absolute inset-0 flex items-center justify-center text-4xl md:text-6xl font-bold text-white whitespace-nowrap opacity-0"
+          className="absolute inset-0 flex items-center justify-center text-4xl md:text-6xl font-bold text-white opacity-0"
         >
-          Building Language.  <br /> Building Confidence. 👩‍👧‍👦
+          Building Language. <br /> Building Confidence. 👩‍👧‍👦
         </h1>
         <p 
           ref={text2Ref} 
-          className="text-xl md:text-3xl text-gray-200 max-w-2xl leading-relaxed opacity-0"
+          className="text-xl md:text-3xl text-gray-200 max-w-2xl mx-auto leading-relaxed opacity-0"
         >
-         Meet the educators behind Language Builders.
+          Meet the educators behind Language Builders.
         </p>
       </div>
     </div>
