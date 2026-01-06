@@ -87,11 +87,15 @@ const NewsletterCard = () => {
 
 // --- Main Footer Section Component ---
 export default function FooterSection() {
-  const footerRef = useRef(null);
+  // 1. Define the type as HTMLDivElement
+  const footerRef = useRef<HTMLDivElement>(null);
 
-  // GSAP Stagger animation for footer columns
   useGSAP(() => {
+    // 2. Add a null check guard
+    if (!footerRef.current) return;
+
     const columns = footerRef.current.querySelectorAll(".footer-col");
+    
     gsap.from(columns, {
       y: 30,
       opacity: 0,
@@ -100,7 +104,7 @@ export default function FooterSection() {
       ease: "power2.out",
       scrollTrigger: {
         trigger: footerRef.current,
-        start: "top 90%", // Trigger when top of footer hits 90% viewport height
+        start: "top 90%",
       }
     });
   }, { scope: footerRef });

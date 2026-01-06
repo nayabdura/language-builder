@@ -137,7 +137,7 @@ const Navbar = () => {
                             initial="closed"
                             animate="open"
                             exit="closed"
-                            variants={menuVariants}
+                           // variants={menuVariants}
                             className="absolute top-full left-0 right-0 mt-2 lg:hidden"
                         >
                             <div className="bg-[#FDF8F3] rounded-3xl border border-[#e8dfd5] p-8 shadow-2xl overflow-hidden">

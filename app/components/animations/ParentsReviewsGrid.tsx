@@ -41,8 +41,6 @@ const itemVariants: Variants = {
   },
 };
 
-// variants={itemVariants}
-
 export default function ParentsReviewsGrid() {
   return (
     <section className="py-16 px-6">
@@ -57,7 +55,7 @@ export default function ParentsReviewsGrid() {
           {reviews.map((review) => (
             <motion.div
               key={review.id}
-              
+              variants={itemVariants}
               className="group relative h-[400px] rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"
             >
               <Image

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion , Variants} from "framer-motion";
 import {
     Book,
     Binary,
@@ -29,18 +29,18 @@ const HeroSection = () => {
     };
 
     // Animation variants for floating icons
-    const floatAnimation = (delay: number) => ({
-        initial: { y: 0 },
-        animate: {
-            y: [0, -15, 0],
-            transition: {
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: delay,
-            },
+ const floatAnimation = (delay: number): Variants => ({
+    initial: { y: 0 },
+    animate: {
+        y: [0, -15, 0],
+        transition: {
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut", // TS now knows this must match Easing types
+            delay: delay,
         },
-    });
+    },
+});
 
     return (
         <section className="relative min-h-[90vh] flex flex-col items-center justify-center bg-[#FDF8F3] pt-24 pb-16 px-6 overflow-hidden">
