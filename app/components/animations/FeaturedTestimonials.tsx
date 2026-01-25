@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import sakina from '../../assets/sakina.jpeg';
@@ -9,19 +9,19 @@ import sakina from '../../assets/sakina.jpeg';
 const featured = [
   {
     id: 1,
-    parent: "Michelle & Tom",
-    child: "Anya, Age 11",
+    parent: "Dr. Khalid Ahmed",
+    child: "Hoorain, age 16",
     img: sakina, // Family photo
     title: "A complete transformation in 6 months.",
-    quote: "We tried everything before this. Language Builders didn't just teach Anya Spanish; it gave her back her academic confidence. The 1-on-1 mentorship is unmatched.",
+    quote: "Hoorain used to dread English classes and struggled with basic concepts. After enrolling in Language Builders, her enthusiasm for learning skyrocketed. The personalized approach and engaging methods made all the difference. Now, she's not only excelling academically but also enjoys creative writing and public speaking.",
   },
   {
     id: 2,
-    parent: "Raj Patel",
-    child: "Kiran, Age 8",
+    parent: "Dr. Faiza Raza",
+    child: "Zain, age 15",
     img: sakina, // Father son photo
-    title: "More than just tutoring.",
-    quote: "It feels like joining a family. The curriculum is rigorous but incredibly engaging. Kiran actually reminds me when it's time for his session now!",
+    title: "From struggling to top of the class.",
+    quote: "Zain was always anxious about English exams. After joining Language Builders, his grades skyrocketed, and he even secured an A+ in his IGCSE English exam. The creative writing workshops were a game-changer.",
   },
 ];
 
@@ -39,9 +39,9 @@ export default function FeaturedTestimonials() {
             className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-[40px] p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center md:items-start shadow-sm border border-purple-100/50"
           >
             {/* Circular Image */}
-            <div className="relative w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-full overflow-hidden border-4 border-white shadow-md">
+            {/* <div className="relative w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-full overflow-hidden border-4 border-white shadow-md">
               <Image src={item.img} alt={item.parent} fill className="object-cover" />
-            </div>
+            </div> */}
 
             {/* Content */}
             <div className="text-center md:text-left">

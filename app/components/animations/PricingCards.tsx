@@ -2,30 +2,32 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Zap } from "lucide-react";
+import Link from "next/link";
 
 const plans = [
   {
-    name: "Starter",
-    monthlyPrice: 0,
-    yearlyPrice: 0,
-    desc: "Perfect for exploring the basics.",
-    features: ["Access to 5 Courses", "Community Forum", "Standard Support", "Mobile App Access"],
+    name: "The Basic",
+    monthlyPrice: 10,
+    dollarprice: 30-35,
+    yearlyPrice: 100,
+    desc: "8 classes per month.",
+    features: ["Learn the basics of creative writing & compreshensive skill", "Time & Days can be decided mutually", "Group of 10 Students", "Certicificate will be provided"],
     highlight: false,
   },
   {
-    name: "Professional",
-    monthlyPrice: 29,
-    yearlyPrice: 24,
-    desc: "The sweet spot for serious builders.",
-    features: ["Unlimited Courses", "Private Mentorship", "Priority Support", "Certificate of Completion", "Ad-free Experience"],
+    name: "The Creative",
+    monthlyPrice: 15,
+    yearlyPrice: 200,
+    desc: "8 classes per month.",
+    features: ["Enhance creative writing, Access the online resources & customized resource pack ", "Time & Days can be decided mutually", "Group of 6 Students", "Certicificate will be provided"],
     highlight: true,
   },
   {
-    name: "Enterprise",
-    monthlyPrice: 99,
-    yearlyPrice: 79,
-    desc: "Advanced tools for large teams.",
-    features: ["Custom Learning Paths", "dedicated Manager", "Bulk Licensing", "API Access", "White-label Options"],
+    name: "The Pro",
+    monthlyPrice: 18,
+    yearlyPrice: 400,
+    desc: "12 classes per month.",
+    features: ["Get individual access to classes & resources", "Flexible days & timings", "Extra Support Provided", "One to One Attention", "Certficates will be provided"],
     highlight: false,
   },
 ];
@@ -86,7 +88,7 @@ export default function PricingCards() {
                   exit={{ opacity: 0, y: -10 }}
                   className="text-5xl font-black text-[#1a1f2d]"
                 >
-                  ${isYearly ? plan.yearlyPrice : plan.monthlyPrice}
+                  PKR {isYearly ? plan.yearlyPrice : plan.monthlyPrice}K
                 </motion.span>
               </AnimatePresence>
               <span className="text-[#5e626f] font-medium"> / month</span>
@@ -103,13 +105,16 @@ export default function PricingCards() {
               ))}
             </ul>
 
-            <button className={`w-full py-4 rounded-full font-bold transition-all ${
-              plan.highlight 
-              ? "bg-gradient-to-r from-[#b14bf4] to-[#6d91fe] text-white shadow-lg shadow-purple-200 hover:opacity-90" 
-              : "bg-white border-2 border-slate-200 text-[#1a1f2d] hover:border-[#b14bf4]"
-            }`}>
-              Get Started
-            </button>
+            <Link
+  href="/contact"
+  className={`w-full py-4 rounded-full font-bold transition-all block text-center ${
+    plan.highlight
+      ? "bg-gradient-to-r from-[#b14bf4] to-[#6d91fe] text-white shadow-lg shadow-purple-200 hover:opacity-90"
+      : "bg-white border-2 border-slate-200 text-[#1a1f2d] hover:border-[#b14bf4]"
+  }`}
+>
+  Get Started
+</Link>
           </motion.div>
         ))}
       </div>

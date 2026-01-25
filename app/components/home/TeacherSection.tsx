@@ -5,43 +5,52 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ArrowRight } from "lucide-react";
-import imran from "../../assets/imran.jpeg"
-import sakina from "../../assets/sakina.jpeg"
+import { Award } from "lucide-react";
+
+// --- Imports ---
+// Make sure the file name matches exactly what is in your folder
+import fabihaCert from "../../assets/fabihaCert.jpeg";
+import ayaanCert from "../../assets/ayaanCert.jpeg";
+import qasimCert from '../../assets/qasimCert.jpeg';
+
+
 import type { StaticImageData } from "next/image";
 
 // --- Types ---
-interface Teacher {
+interface Certificate {
   id: number;
-  name: string;
-  role: string;
-  image: string | StaticImageData; // Allow both strings (URLs) and local imports
-  bgColor: string; 
+  studentName: string;
+  achievement: string; 
+  image: string | StaticImageData;
 }
 
-const teachers: Teacher[] = [
+const certificates: Certificate[] = [
   {
     id: 1,
-    name: "Alex Johnson",
-    role: "UI/UX Teacher",
-    image: imran,
-    bgColor: "bg-rose-50",
+    studentName: "Fabiha Azeem",
+    achievement: "English 1123 'O' Level Workshop",
+    image: fabihaCert, 
   },
   {
     id: 2,
-    name: "Sarah Miller",
-    role: "Web Development Teacher",
-    image: sakina,
-    bgColor: "bg-orange-50",
+    studentName: "Ayaan Khalid",
+    achievement: "English 1123 'O' Level Workshop",
+    image: ayaanCert, 
+  },
+  {
+    id: 3,
+    studentName: "Qasim Noman",
+    achievement: "English 1123 'O' Level Workshop",
+    image: qasimCert, 
   },
 ];
 
-// --- Sub-Component: Teacher Card ---
-const TeacherCard = ({ teacher, index }: { teacher: Teacher; index: number }) => {
+// --- Sub-Component: Certificate Card ---
+const CertificateCard = ({ cert, index }: { cert: Certificate; index: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
-  // GSAP: Smooth Hover Interaction
+  // GSAP: Elegant Hover Lift
   useGSAP(() => {
     const card = cardRef.current;
     const img = imageRef.current;
@@ -49,102 +58,100 @@ const TeacherCard = ({ teacher, index }: { teacher: Teacher; index: number }) =>
     if (!card || !img) return;
 
     const hoverAnimation = gsap.to(card, {
-      y: -10,
-      scale: 1.02,
-      boxShadow: "0px 20px 40px rgba(0,0,0,0.08)",
+      y: -8,
+      boxShadow: "0px 25px 50px rgba(0,0,0,0.1)",
       duration: 0.4,
       paused: true,
       ease: "power2.out",
     });
 
-    const imgAnimation = gsap.to(img, {
-      scale: 1.05,
-      duration: 0.4,
+    const imgScale = gsap.to(img, {
+      scale: 1.02, // Subtle zoom
+      duration: 0.5,
       paused: true,
       ease: "power2.out",
     });
 
     card.addEventListener("mouseenter", () => {
       hoverAnimation.play();
-      imgAnimation.play();
+      imgScale.play();
     });
     card.addEventListener("mouseleave", () => {
       hoverAnimation.reverse();
-      imgAnimation.reverse();
+      imgScale.reverse();
     });
   }, { scope: cardRef });
 
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
-      className="group relative flex flex-col items-center bg-white rounded-3xl p-4 cursor-pointer"
+      transition={{ duration: 0.5, delay: index * 0.15 }}
+      className="group flex flex-col bg-white rounded-2xl p-3 shadow-sm border border-slate-100"
     >
-      {/* Pastel Background & Image Container */}
-      <div className={`relative w-full aspect-[4/5] rounded-2xl overflow-hidden ${teacher.bgColor} flex items-end justify-center`}>
-        <div ref={imageRef} className="relative w-full h-full transition-transform">
+      {/* Image Container - Adjusted for Certificate Size 
+         aspect-[1.4] is roughly the ratio of A4 Landscape paper (1.414).
+         This fits certificates much better than standard 4:3 or 16:9.
+      */}
+      <div className="relative w-full aspect-[1.4] rounded-xl overflow-hidden bg-slate-50 mb-5 border border-slate-100">
+        <div ref={imageRef} className="relative w-full h-full">
           <Image
-            src={teacher.image}
-            alt={teacher.name}
+            src={cert.image}
+            alt={`${cert.studentName} Certificate`}
             fill
-            className="object-cover object-top"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            // object-contain ensures the WHOLE certificate is seen (no cropped borders)
+            className="object-contain" 
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
       </div>
 
-      {/* Role Badge - Positioned to overlap image bottom */}
-      <div className="absolute top-[75%] left-1/2 -translate-x-1/2 z-10">
-        <span className="bg-white px-6 py-2 rounded-lg text-xs font-semibold text-slate-600 shadow-sm border border-slate-100 whitespace-nowrap">
-          {teacher.role}
-        </span>
-      </div>
-
-      {/* Teacher Name */}
-      <div className="mt-10 mb-4">
-        <h3 className="text-2xl font-bold text-slate-800 tracking-tight">
-          {teacher.name}
+      {/* Minimal Info Section */}
+      <div className="px-2 pb-2 text-center">
+        <h3 className="text-lg font-bold text-slate-800 leading-tight mb-1">
+          {cert.achievement}
         </h3>
+        <p className="text-sm font-medium text-slate-500 uppercase tracking-wider">
+          {cert.studentName}
+        </p>
       </div>
     </motion.div>
   );
 };
 
-// --- Main Component: Teachers Section ---
-export default function TeachersSection() {
+// --- Main Component ---
+export default function StudentCertificates() {
   return (
-    <section className="max-w-7xl bg-white mx-auto px-6 py-20 font-sans">
-      {/* Header Area */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
-        <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-          Meet Our Teachers
-        </h2>
+    <section className="bg-white mx-auto px-6 py-20 font-sans">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Simple, Clean Header */}
+        <div className="text-center mb-16 space-y-4">
+            <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-yellow-100 text-yellow-600 mb-2"
+            >
+                <Award size={24} />
+            </motion.div>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+                Hall of Fame
+            </h2>
+            <p className="text-slate-500 max-w-2xl mx-auto text-lg">
+                Celebrating the outstanding achievements and certified success of our brilliant students.
+            </p>
+        </div>
 
-        {/* Explore Button with Framer Motion Icon Animation */}
-        <motion.button
-          whileHover="hover"
-          className="group flex items-center gap-2 px-6 py-3 border-2 border-purple-900 rounded-full text-purple-900 font-bold transition-colors hover:bg-purple-900 hover:text-white"
-        >
-          Explore our Teachers
-          <motion.div
-            variants={{
-              hover: { x: 5 },
-            }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
-            <ArrowRight size={20} />
-          </motion.div>
-        </motion.button>
-      </div>
+        {/* Responsive Grid: 1 col mobile, 2 col tablet, 3 col desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {certificates.map((cert, index) => (
+            <CertificateCard key={cert.id} cert={cert} index={index} />
+          ))}
+        </div>
 
-      {/* Responsive Grid: 1 col on mobile, 2 col on desktop */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-        {teachers.map((teacher, index) => (
-          <TeacherCard key={teacher.id} teacher={teacher} index={index} />
-        ))}
       </div>
     </section>
   );

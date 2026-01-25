@@ -43,10 +43,10 @@ const HeroSection = () => {
 });
 
     return (
-        <section className="relative min-h-[90vh] flex flex-col items-center justify-center bg-[#FDF8F3] pt-24 pb-16 px-6 overflow-hidden">
+        <section className="relative min-h-[90vh] flex flex-col items-center justify-center bg-[#FDF8F3] pt-24 pb-16 px-6 ">
 
             {/* --- Floating Icons Layer --- */}
-            <div className="absolute inset-0 pointer-events-none hidden md:block">
+            <div className="absolute inset-0 pointer-events-none hidden md:block overflow-hidden">
                 {/* English */}
                 <motion.div
                     {...floatAnimation(0)}
@@ -97,7 +97,7 @@ const HeroSection = () => {
             </div>
 
             {/* --- Main Content --- */}
-            <div className="relative z-10 max-w-4xl w-full text-center space-y-8">
+            <div className="relative z-20 max-w-4xl w-full text-center space-y-8">
 
                 {/* Heading */}
                 <motion.h1
@@ -117,7 +117,7 @@ const HeroSection = () => {
                     transition={{ duration: 0.6, delay: 0.1 }}
                     className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed"
                 >
-                    Helping students grow with expert-led lessons in English, Urdu, Math, Science, and more.
+                    Empowering students through expert-led, structured online learning.
                 </motion.p>
 
                 {/* Trust Indicator Card */}

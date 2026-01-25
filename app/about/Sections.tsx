@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Target, Eye, Globe, Zap, Heart } from "lucide-react";
+import { Target, Eye, Globe, Zap, Heart, } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -72,7 +73,7 @@ export const AboutHero = () => {
           transition={{ delay: 0.8, duration: 1 }}
           className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed"
         >
-          A world-class platform where language meets culture. We build bridges through words and confidence through mentorship.
+          An all-in-one online learning platform offering language development, academic support, and structured homeschooling programs designed to build confidence and independent learners..
         </motion.p>
       </div>
       
@@ -116,7 +117,7 @@ export const MissionVision = () => {
           </div>
           <h2 className="text-4xl font-bold mb-6 text-slate-900">Our Mission</h2>
           <p className="text-slate-600 leading-relaxed text-lg">
-            To empower 1 million students by 2030 with the linguistic tools necessary to thrive in an interconnected global economy.
+            To prepare students for success in international assessments and global learning pathways through quality instruction, mentorship, and skill-based education.
           </p>
         </div>
         <div className="mission-card bg-indigo-50 p-12 rounded-[48px] border border-indigo-100 shadow-sm">
@@ -125,7 +126,7 @@ export const MissionVision = () => {
           </div>
           <h2 className="text-4xl font-bold mb-6 text-slate-900">Our Vision</h2>
           <p className="text-slate-600 leading-relaxed text-lg">
-            A world where language is no longer a barrier to opportunity, but a gateway to empathy and mutual understanding.
+            To make high-quality homeschooling and online learning accessible, affordable, and effective for families worldwide, empowering learners to grow academically, linguistically, and confidently—right from their homes.
           </p>
         </div>
       </div>
@@ -135,8 +136,8 @@ export const MissionVision = () => {
 
 // --- 3. Teachers Section: Staggered Zoom & 3D Hover ---
 const teachers = [
-  { id: 1, name: "Imran", role: "English Mentor", color: "bg-purple-50", img: imran },
-  { id: 2, name: "Sakina Imran", role: "Spanish Instructor", color: "bg-amber-50", img: sakina },
+  { id: 1, name: " Imran Ali Jamal", role: "Co-Founder | Academic Strategist", description: "Imran Ali Jamal brings a visionary and structured approach to education, focusing on building future-ready learning pathways. With a strong understanding of global curricula and assessment standards, he contributes to designing programs that support academic excellence and measurable student success." , color: "bg-purple-50", img: imran  },
+  { id: 2, name: "Sakina Imran", role: "Founder | Lead Educator & Curriculum Designer", description: "Sakina Imran is an experienced educator and curriculum designer with a deep commitment to making learning accessible, meaningful, and globally relevant. As the Founder, she leads the academic vision, specializing in language development, assessment design, homeschooling support, and preparing students for international benchmarks with confidence and clarity.", color: "bg-amber-50", img: sakina },
 ];
 
 export const TeachersSection = () => {
@@ -182,7 +183,7 @@ export const TeachersSection = () => {
               </div>
               <h3 className="text-3xl font-bold text-slate-900 mb-2">{t.name}</h3>
               <p className="text-purple-600 font-bold uppercase tracking-widest text-sm mb-6">{t.role}</p>
-              <p className="text-slate-600">Expert in immersive learning techniques and cognitive linguistic development.</p>
+              <p className="text-slate-600">{t.description}</p>
             </div>
           ))}
         </div>
@@ -249,14 +250,18 @@ export const AboutCTA = () => {
   return (
     <section className="py-32 px-6">
       <div ref={ctaRef} className="max-w-5xl mx-auto bg-[#5B2C6F] rounded-[60px] p-16 md:p-24 text-center text-white relative overflow-hidden shadow-2xl shadow-purple-900/20">
-        <h2 className="text-4xl md:text-6xl font-black mb-10 relative z-10">Start Your Journey Today</h2>
-        <motion.button
-          whileHover={{ scale: 1.1, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
-          whileTap={{ scale: 0.9 }}
-          className="bg-white text-[#5B2C6F] px-12 py-5 rounded-full font-black text-xl relative z-10 transition-all"
-        >
-          Explore All Subjects
-        </motion.button>
+        <h2 className="text-4xl md:text-6xl font-black mb-10 relative z-10">You can start your Teaching <br/>  Journey with us </h2>
+      
+        <Link href="/contact" className="inline-block relative z-10">
+          <motion.div
+            whileHover={{ scale: 1.1, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
+            whileTap={{ scale: 0.9 }}
+            className="bg-white text-[#5B2C6F] px-12 py-5 rounded-full font-black text-xl transition-all cursor-pointer"
+          >
+            Contact Us Today
+          </motion.div>
+        </Link>
+       
         {/* Animated Background Blob */}
         <div className="absolute -top-20 -right-20 w-80 h-80 bg-white/10 rounded-full blur-[100px] animate-pulse" />
       </div>
@@ -265,7 +270,7 @@ export const AboutCTA = () => {
 };
 
 const features = [
-  { icon: Globe, title: "Global Reach", desc: "Connect with native speakers and students from over 120 countries." },
-  { icon: Zap, title: "Fast Progression", desc: "Our method is designed to get you conversational in 90 days." },
-  { icon: Heart, title: "Cultural Depth", desc: "We don't just teach words; we teach the soul of the language." },
+  { icon: Globe, title: "Global Reach", desc: "Supporting students and homeschooling families worldwide through flexible online education aligned with international standards." },
+  { icon: Zap, title: "Structured Progress", desc: "Clear learning pathways, guided mentorship, and measurable outcomes to help students grow confidently across subjects and skills." },
+  { icon: Heart, title: "Confidence & Competence", desc: "Building independent learners, strong communicators, and critical thinkers prepared for global assessments and real-world success." },
 ];

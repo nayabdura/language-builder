@@ -5,15 +5,20 @@ import Image from "next/image";
 // 1. Import Variants type
 import { motion, Variants } from "framer-motion";
 import { Quote } from "lucide-react";
-import sakina from '../../assets/sakina.jpeg';
+import ayaanCert from "../../assets/ayaanCert.jpeg";
+import fabihaCert from "../../assets/fabihaCert.jpeg";
+import qasimCert from '../../assets/qasimCert.jpeg';
+import hoorainCert from '../../assets/hoorainCert.jpeg';
+import mariumCert from '../../assets/mariumCert.jpeg';
+import soofiaCert from '../../assets/soofiaCert.jpeg';
 
 const reviews = [
-  { id: 1, name: "Sarah M.", child: "Leo, Age 7", img: sakina, quote: "Leo asks to do his lessons every morning. It's changed our routine!" },
-  { id: 2, name: "David K.", child: "Maya, Age 9", img: sakina, quote: "The mentors are incredible. Maya's confidence has soared." },
-  { id: 3, name: "Elena R.", child: "Mateo, Age 6", img: sakina, quote: "Finally, a program that understands how children actually learn." },
-  { id: 4, name: "James T.", child: "Chloe, Age 8", img: sakina, quote: "She's making progress without feeling pressured. We love it." },
-  { id: 5, name: "Aisha B.", child: "Zain, Age 10", img: sakina, quote: "The best investment we've made in his education so far." },
-  { id: 6, name: "Michael P.", child: "Lily, Age 5", img: sakina, quote: "Joyful, engaging, and effective. Highly recommend!" },
+  { id: 1, name: "Ayaan Khalid.", child: "O Levels", img: ayaanCert, quote: "Ayaan asks to do his lessons every morning. It's changed our routine!" },
+  { id: 2, name: "Fabiha Azeem.", child: "O Levels", img: fabihaCert, quote: "The mentors are incredible. Maya's confidence has soared." },
+  { id: 3, name: "Qasim Noman.", child: "O Levels", img: qasimCert, quote: "Finally, a program that understands how children actually learn." },
+  { id: 4, name: "Hoorain Hussain.", child: "English Club", img: hoorainCert, quote: "She's making progress without feeling pressured. We love it." },
+  { id: 5, name: "Marium Tosif.", child: "English Club", img: mariumCert, quote: "The best investment we've made in his education so far." },
+  { id: 6, name: "Soofia.", child: "English Club", img: soofiaCert, quote: "Joyful, engaging, and effective. Highly recommend!" },
 ];
 
 // 2. Add the : Variants type here
@@ -75,7 +80,7 @@ export default function ParentsReviewsGrid() {
                 </p>
                 <div>
                   <h3 className="font-bold text-xl">{review.name}</h3>
-                  <p className="text-purple-200 text-sm font-medium">Parent of {review.child}</p>
+                  <p className="text-purple-200 text-sm font-medium">Student of {review.child}</p>
                 </div>
               </div>
             </motion.div>

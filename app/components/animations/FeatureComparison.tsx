@@ -7,51 +7,51 @@ import { Check, Minus, Info } from "lucide-react";
 const features = [
   { 
     name: "Video Lessons", 
-    starter: "5 Lessons", 
-    pro: "Unlimited", 
-    enterprise: "Unlimited + Live",
+    basic: "8 Lessons", 
+    creative: "8 Lessons", 
+    Pro: "12 Lessons",
     category: "Learning" 
   },
   { 
-    name: "Quizzes & Exercises", 
-    starter: true, 
-    pro: true, 
-    enterprise: true,
+    name: "Time & Days", 
+    basic: "Mutually Decided", 
+    creative: "Mutually Decided", 
+    Pro: "Flexible",
     category: "Learning" 
   },
   { 
-    name: "Mentorship Sessions", 
-    starter: false, 
-    pro: "1 per month", 
-    enterprise: "Weekly",
+    name: "Student Group Size", 
+    basic: "10 Students", 
+    creative: "6 Students", 
+    Pro: "One to One",
     category: "Support" 
   },
   { 
-    name: "Community Access", 
-    starter: true, 
-    pro: true, 
-    enterprise: true,
+    name: "Resources Access", 
+    basic: false, 
+    creative: false, 
+    Pro: true,
     category: "Social" 
   },
   { 
-    name: "Offline Downloads", 
-    starter: false, 
-    pro: true, 
-    enterprise: true,
+    name: "Certificate Provided", 
+    basic: true, 
+    creative: true, 
+    Pro: true,
     category: "Learning" 
   },
   { 
     name: "Custom Learning Path", 
-    starter: false, 
-    pro: false, 
-    enterprise: true,
+    basic: false, 
+    creative: false, 
+    Pro: true,
     category: "Learning" 
   },
   { 
     name: "Priority Support", 
-    starter: false, 
-    pro: true, 
-    enterprise: "24/7 Dedicated",
+    basic: false, 
+    creative: true, 
+    Pro: "24/7 Dedicated",
     category: "Support" 
   },
 ];
@@ -80,9 +80,9 @@ export default function FeatureComparison() {
         {/* Desktop Header */}
         <div className="hidden md:grid grid-cols-4 gap-4 px-8 py-6 bg-white rounded-t-[30px] border-x border-t border-slate-100 shadow-sm">
           <div className="text-sm font-bold text-slate-400 uppercase tracking-widest">Features</div>
-          <div className="text-center text-sm font-bold text-slate-900">Starter</div>
-          <div className="text-center text-sm font-bold text-[#b14bf4]">Professional</div>
-          <div className="text-center text-sm font-bold text-slate-900">Enterprise</div>
+          <div className="text-center text-sm font-bold text-slate-900">basic</div>
+          <div className="text-center text-sm font-bold text-[#b14bf4]">Creative</div>
+          <div className="text-center text-sm font-bold text-slate-900">Pro</div>
         </div>
 
         {/* Feature Rows */}
@@ -102,9 +102,9 @@ export default function FeatureComparison() {
                   <span className="font-bold text-slate-700">{item.name}</span>
                   <Info size={14} className="text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity cursor-help" />
                 </div>
-                <div className="text-center"><RenderValue value={item.starter} /></div>
-                <div className="text-center bg-purple-50/50 py-2 rounded-xl"><RenderValue value={item.pro} /></div>
-                <div className="text-center"><RenderValue value={item.enterprise} /></div>
+                <div className="text-center"><RenderValue value={item.basic} /></div>
+                <div className="text-center bg-purple-50/50 py-2 rounded-xl"><RenderValue value={item.creative} /></div>
+                <div className="text-center"><RenderValue value={item.Pro} /></div>
               </div>
 
               {/* Mobile Card (Visible on mobile only) */}
@@ -112,16 +112,16 @@ export default function FeatureComparison() {
                 <h4 className="font-bold text-slate-900 mb-4 text-lg border-b border-slate-100 pb-2">{item.name}</h4>
                 <div className="grid grid-cols-3 gap-2 text-center">
                   <div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Starter</p>
-                    <RenderValue value={item.starter} />
+                    <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Basic</p>
+                    <RenderValue value={item.basic} />
                   </div>
                   <div className="bg-purple-50 rounded-xl py-2">
-                    <p className="text-[10px] font-bold text-[#b14bf4] uppercase mb-1">Pro</p>
-                    <RenderValue value={item.pro} />
+                    <p className="text-[10px] font-bold text-[#b14bf4] uppercase mb-1">Creative</p>
+                    <RenderValue value={item.creative} />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Ent.</p>
-                    <RenderValue value={item.enterprise} />
+                    <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Pro</p>
+                    <RenderValue value={item.Pro} />
                   </div>
                 </div>
               </div>

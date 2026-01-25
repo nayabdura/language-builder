@@ -1,24 +1,30 @@
 "use client";
 
 import React, { useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Instagram, Dribbble, Twitter, Youtube, Send } from "lucide-react";
 
-// --- Constants for Links ---
-const companyLinks = ["Home", "Courses", "Mentors", "Testimonial", "Join", "Contact Us"];
-const supportLinks = ["Help center", "Terms of service", "Legal", "Privacy Policy", "Status"];
+// --- Constants ---
+const companyLinks = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "Reviews", href: "/reviews" },
+  { name: "Contact Us", href: "/contact" },
+];
+
+const supportLinks = ["Terms of service", "Legal", "Privacy Policy"];
 const socialIcons = [Instagram, Dribbble, Twitter, Youtube];
 
 // --- Newsletter Card Component ---
 const NewsletterCard = () => {
-  const ribbonRef = useRef(null);
-  const containerRef = useRef(null);
+  // FIX: Added <HTMLDivElement> type
+  const ribbonRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // GSAP Animation for the ribbon badge slide-in
   useGSAP(() => {
     gsap.from(ribbonRef.current, {
       y: -50,
@@ -58,27 +64,18 @@ const NewsletterCard = () => {
           </form>
         </div>
 
-        {/* Right Image (Overflowing) */}
-        <div className="md:w-5/12 lg:w-1/2 relative min-h-[300px] md:min-h-auto">
-          {/* Using a placeholder image that matches the colorful hand concept */}
-          <Image
-            src=""
-            alt="Creative Arts"
-            fill
-            className="object-cover md:object-contain object-right-bottom md:scale-125 md:translate-x-10 md:translate-y-10"
-          />
-        </div>
+        {/* Right Image Placeholder */}
+        <div className="md:w-5/12 lg:w-1/2 relative"></div>
 
-        {/* Ribbon Badge (GSAP Animated) */}
+        {/* Ribbon Badge */}
         <div
           ref={ribbonRef}
           className="absolute top-0 right-8 bg-[#FF6B4A] text-white py-4 px-3 flex flex-col items-center text-center font-bold shadow-md"
-          // Using clip-path to create the notched ribbon bottom shape
           style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%)" }}
         >
-          <span className="text-lg leading-none mb-1">FREE</span>
-          <span className="text-[10px] leading-tight opacity-90">FOR NEW<br />USERS</span>
-          <div className="h-3"></div> {/* Spacer for the clip-path bottom area */}
+          <span className="text-lg leading-none mb-1">Enroll</span>
+          <span className="text-[10px] leading-tight opacity-90">Now</span>
+          <div className="h-3"></div>
         </div>
       </div>
     </div>
@@ -87,11 +84,10 @@ const NewsletterCard = () => {
 
 // --- Main Footer Section Component ---
 export default function FooterSection() {
-  // 1. Define the type as HTMLDivElement
+  // FIX: Added <HTMLDivElement> type so TypeScript knows it has querySelectorAll
   const footerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    // 2. Add a null check guard
     if (!footerRef.current) return;
 
     const columns = footerRef.current.querySelectorAll(".footer-col");
@@ -116,11 +112,8 @@ export default function FooterSection() {
       viewport={{ once: true, amount: 0.2 }}
       className="relative mt-24"
     >
-      {/* The Overlapping Newsletter Card */}
       <NewsletterCard />
 
-      {/* The Main Purple Footer */}
-      {/* Negative margin top pulls it under the newsletter card */}
       <div ref={footerRef} className="bg-[#5B2C6F] pt-40 pb-16 -mt-32 relative z-10 text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           
@@ -148,12 +141,12 @@ export default function FooterSection() {
 
           {/* Column 2: Company Links */}
           <div className="footer-col">
-            <h3 className="text-lg font-bold mb-6">Company</h3>
+            <h3 className="text-lg font-bold mb-6">Language Builders</h3>
             <ul className="space-y-4">
               {companyLinks.map((link, i) => (
                 <li key={i}>
-                  <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                    {link}
+                  <Link href={link.href} className="text-white/70 hover:text-white transition-colors">
+                    {link.name}
                   </Link>
                 </li>
               ))}

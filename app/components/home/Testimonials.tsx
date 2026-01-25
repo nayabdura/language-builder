@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { Star, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
+import { Star, Quote } from "lucide-react";
 import gsap from "gsap";
 import { Draggable } from "gsap/dist/Draggable";
 import { useGSAP } from "@gsap/react";
@@ -12,52 +11,55 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(Draggable);
 }
 
+// --- Updated Data from Images ---
 const testimonials = [
   {
     id: 1,
-    name: "Andrew Williams",
-    role: "UX/UI Designer",
-    avatar: "",
-    content: "I have been a Junior Graphic Designer for more than 10 years. Some things are problem that I had and teach how to solve them.",
+    name: "Dr. Faiza Raza",
+    role: "London",
+    content: "Thanks to Language Builders, my child achieved an A+ in their IGCSE English exam, with a particular highlight in creative writing. For a year now, we've experienced interactive sessions that are not only engaging but also immensely educational. The learning experience has been exceptional, and we credit Language Builders for their fantastic support.",
   },
   {
     id: 2,
-    name: "Sarah Miller",
-    role: "Product Designer",
-    avatar: "",
-    content: "The depth of information provided here is unparalleled. I finally understand the 'why' behind design choices.",
+    name: "Asma Wakeel",
+    role: "Parent",
+    content: "I had a really good experience, Alhamdulillah. I've seen a major improvement in my son's speaking skills within just 2-3 months. The teacher is kind, patient, dedicated and passionate about teaching, with a strong grasp of the subject. The cherry on top is that a lot of general knowledge is discussed in the sessions, which broadens my child's worldview.",
   },
   {
     id: 3,
-    name: "Cristian Doru Barin",
-    role: "UX/UI Designer",
-    avatar: "",
-    content: "I have been a Junior Graphic Designer for more than 10 years. That's why this course is so great!",
+    name: "Dr. Khalil",
+    role: "Parent (Gems School Dubai)",
+    content: "Language Builders has provided exceptional learning support for my child at The Gems School Dubai. Their interactive sessions for the British curriculum in Science and English have led to significant improvement in academic performance. The tutor's dedication in managing classroom activities while keeping me updated is commendable.",
   },
 ];
 
-// Double the array to create the infinite loop base
-const infiniteTestimonials = [...testimonials, ...testimonials];
-
 const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0] }) => {
   return (
-    <div className="flex-shrink-0 w-full md:w-[380px] bg-white rounded-[32px] p-8 shadow-sm border border-slate-50 flex flex-col items-center text-center mx-4 select-none">
-      <div className="relative mb-4">
-        <div className="w-20 h-20 rounded-full overflow-hidden bg-slate-200">
-          <Image src={testimonial.avatar} alt={testimonial.name} width={80} height={80} className="object-cover" />
-        </div>
-        <div className="absolute bottom-0 right-0 bg-white rounded-full p-0.5">
-          <CheckCircle2 className="w-6 h-6 text-green-500 fill-green-500 stroke-white" />
-        </div>
+    <div className="flex-shrink-0 w-full md:w-[400px] bg-white rounded-[32px] p-8 shadow-sm border border-slate-50 flex flex-col mx-4 select-none relative group transition-all hover:-translate-y-1 hover:shadow-md">
+      
+      {/* Quote Icon Background */}
+      <div className="absolute top-6 right-8 opacity-10">
+        <Quote size={60} className="text-[#582066]" />
       </div>
-      <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">{testimonial.role}</p>
-      <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">{testimonial.name}</h3>
+
       <div className="flex gap-1 mb-6">
         {[...Array(5)].map((_, i) => (
-          <Star key={i} size={16} className="fill-orange-300 text-orange-300" />
+          <Star key={i} size={18} className="fill-orange-400 text-orange-400" />
         ))}
       </div>
-      <p className="text-slate-600 leading-relaxed text-[15px]">{testimonial.content}</p>
+
+      <p className="text-slate-600 leading-relaxed text-[15px] mb-8 flex-grow">
+        &quot;{testimonial.content}&quot;
+      </p>
+
+      <div className="mt-auto border-t border-slate-100 pt-6">
+        <h3 className="text-xl font-bold text-[#582066] leading-tight">
+          {testimonial.name}
+        </h3>
+        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">
+          {testimonial.role}
+        </p>
+      </div>
     </div>
   );
 };
@@ -68,46 +70,38 @@ export default function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useGSAP(() => {
-    if (!sliderRef.current) return;
+    if (!sliderRef.current || !containerRef.current) return;
 
     const slider = sliderRef.current;
+    const container = containerRef.current;
     const cards = gsap.utils.toArray(".flex-shrink-0") as HTMLElement[];
+    
+    // Calculate boundaries
     const cardWidth = cards[0].offsetWidth + 32; // Width + Margin
     const totalWidth = cardWidth * testimonials.length;
-
-    // Set initial position to the middle to allow dragging both ways
-    gsap.set(slider, { x: -totalWidth });
+    const containerWidth = container.offsetWidth;
+    
+    // Calculate max drag distance (negative value)
+    // If total content is smaller than container, don't allow dragging left
+    const minX = Math.min(0, containerWidth - totalWidth - 40); 
 
     Draggable.create(slider, {
       type: "x",
+      bounds: { minX: minX, maxX: 0 }, // Stops dragging at edges (No Infinite Loop)
       inertia: true,
+      edgeResistance: 0.65,
       onDrag: function() {
-        // Infinite Wrap Logic
-        if (this.x > 0) {
-          gsap.set(this.target, { x: this.x - totalWidth });
-          this.update();
-        } else if (this.x < -totalWidth) {
-          gsap.set(this.target, { x: this.x + totalWidth });
-          this.update();
-        }
-        
-        // Update pagination dots (modulo for looping)
         const rawIndex = Math.abs(Math.round(this.x / cardWidth));
-        setActiveIndex(rawIndex % testimonials.length);
+        setActiveIndex(Math.min(rawIndex, testimonials.length - 1));
       },
       onThrowUpdate: function() {
-        // Same logic for inertia throw
-        if (this.x > 0) {
-          gsap.set(this.target, { x: this.x - totalWidth });
-          this.update();
-        } else if (this.x < -totalWidth) {
-          gsap.set(this.target, { x: this.x + totalWidth });
-          this.update();
-        }
         const rawIndex = Math.abs(Math.round(this.x / cardWidth));
-        setActiveIndex(rawIndex % testimonials.length);
+        setActiveIndex(Math.min(rawIndex, testimonials.length - 1));
       },
-      snap: (value) => Math.round(value / cardWidth) * cardWidth,
+      // Snap to card positions
+      snap: (value) => {
+        return Math.round(value / cardWidth) * cardWidth;
+      }
     });
   }, { scope: containerRef });
 
@@ -118,13 +112,19 @@ export default function TestimonialsSection() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
           <div className="max-w-xl">
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 leading-tight">
-              What Our Happy <br /> Students Says
+              What Our Happy <br /> <span className="text-[#582066]">Parents Say</span>
             </h2>
-            <p className="text-slate-600 text-lg">Build skills with our courses and mentor from world-class companies.</p>
+            <p className="text-slate-600 text-lg">
+              Real feedback from families who have experienced our personalized learning approach.
+            </p>
           </div>
-          <button className="px-8 py-3 border-2 border-purple-900 rounded-full text-purple-900 font-bold hover:bg-purple-900 hover:text-white transition-all">
-            Give Your Review
-          </button>
+          
+          <Link 
+            href="/reviews" 
+            className="px-8 py-3 border-2 border-[#582066] rounded-full text-[#582066] font-bold hover:bg-[#582066] hover:text-white transition-all flex items-center gap-2"
+          >
+            Check More Reviews
+          </Link>
         </div>
 
         {/* --- The Transparent Box Container --- */}
@@ -134,10 +134,10 @@ export default function TestimonialsSection() {
         >
           <div 
             ref={sliderRef}
-            className="flex w-fit cursor-grab active:cursor-grabbing"
+            className="flex w-fit cursor-grab active:cursor-grabbing pl-4"
           >
-            {infiniteTestimonials.map((testimonial, idx) => (
-              <TestimonialCard key={`${testimonial.id}-${idx}`} testimonial={testimonial} />
+            {testimonials.map((testimonial, idx) => (
+              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
             ))}
           </div>
         </div>
@@ -148,7 +148,7 @@ export default function TestimonialsSection() {
             <div
               key={i}
               className={`h-2 rounded-full transition-all duration-300 ${
-                activeIndex === i ? "w-8 bg-slate-800" : "w-2 bg-slate-300"
+                activeIndex === i ? "w-8 bg-[#582066]" : "w-2 bg-slate-300"
               }`}
             />
           ))}

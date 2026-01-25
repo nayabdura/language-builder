@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import Link from "next/link"; // 1. Import Link
 
 export default function PricingCTA() {
   return (
@@ -13,13 +14,18 @@ export default function PricingCTA() {
           <p className="text-white/80 text-xl mb-10 max-w-xl mx-auto font-medium">
             Join over 10,000+ creators and students building the future of design and language.
           </p>
-          <motion.button 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-12 py-5 bg-white text-[#b14bf4] rounded-full font-black text-xl shadow-2xl"
-          >
-            Start Your Free Trial
-          </motion.button>
+          
+          {/* 2. Added Link wrapper and changed button to motion.div */}
+          <Link href="/contact">
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block px-12 py-5 bg-white text-[#b14bf4] rounded-full font-black text-xl shadow-2xl cursor-pointer"
+            >
+              Start Your Free Trial
+            </motion.div>
+          </Link>
+
         </div>
         {/* Background Accents */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
