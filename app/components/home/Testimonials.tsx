@@ -56,9 +56,7 @@ export default function TestimonialsSection() {
     // Start in the middle set
     gsap.set(slider, { x: -setWidth });
 
-    // Define logic using arrow function (no 'this')
     const updateLogic = () => {
-      // Safely get the instance without 'this'
       const instance = Draggable.get(slider);
       if (!instance) return;
 
@@ -70,7 +68,8 @@ export default function TestimonialsSection() {
       
       // Sync internal pointer and DOM if teleported
       if (x !== instance.x) {
-        instance.x = x;
+        // FIX: Use 'unknown' cast to safely modify the read-only property without 'any'
+        (instance as unknown as { x: number }).x = x;
         gsap.set(slider, { x });
       }
 
