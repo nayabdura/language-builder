@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const infoItems = [
-  { icon: Mail, title: "Email Us", detail: "hello@langbuilders.com", color: "bg-purple-50 text-[#b14bf4]" },
-  { icon: Phone, title: "Call Us", detail: "+1 (555) 000-0000", color: "bg-blue-50 text-[#6d91fe]" },
-  { icon: MapPin, title: "Visit Us", detail: "123 Design St, San Francisco", color: "bg-slate-50 text-slate-600" },
+  { icon: Mail, title: "Email Us", detail: "official.languagebuilders@gmail.com", color: "bg-purple-50 text-[#b14bf4]" },
+  { icon: Phone, title: "Call Us", detail: "+92 306 2729592", color: "bg-blue-50 text-[#6d91fe]" },
+  { icon: MapPin, title: "Visit Us", detail: "Remote", color: "bg-slate-50 text-slate-600" },
 ];
 
 export default function ContactInfo() {

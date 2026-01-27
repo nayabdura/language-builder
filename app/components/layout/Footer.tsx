@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Instagram, Dribbble, Twitter, Youtube, Send } from "lucide-react";
+import { Instagram, Youtube, Send, Facebook } from "lucide-react";
 
 // --- Constants ---
 const companyLinks = [
@@ -17,11 +17,25 @@ const companyLinks = [
 ];
 
 const supportLinks = ["Terms of service", "Legal", "Privacy Policy"];
-const socialIcons = [Instagram, Dribbble, Twitter, Youtube];
+
+// UPDATED: Social Media Links Configuration
+const socialLinks = [
+  { 
+    icon: Instagram, 
+    href: "https://www.instagram.com/languagebuilderss" 
+  },
+  { 
+    icon: Facebook, 
+    href: "https://www.facebook.com/Languagebuilders.pk" 
+  },
+  { 
+    icon: Youtube, 
+    href: "https://www.youtube.com/@languagebuilders" 
+  }
+];
 
 // --- Newsletter Card Component ---
 const NewsletterCard = () => {
-  // FIX: Added <HTMLDivElement> type
   const ribbonRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -84,7 +98,6 @@ const NewsletterCard = () => {
 
 // --- Main Footer Section Component ---
 export default function FooterSection() {
-  // FIX: Added <HTMLDivElement> type so TypeScript knows it has querySelectorAll
   const footerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -125,11 +138,15 @@ export default function FooterSection() {
             <p className="text-white/80 mb-8 leading-relaxed max-w-xs">
               Level up your skills, and get dream job with passion.
             </p>
+            
+            {/* UPDATED: Social Icons Mapping */}
             <div className="flex gap-4">
-              {socialIcons.map((Icon, index) => (
+              {socialLinks.map(({ icon: Icon, href }, index) => (
                 <motion.a
                   key={index}
-                  href="#"
+                  href={href}
+                  target="_blank" // Opens in new tab
+                  rel="noopener noreferrer" // Security best practice for new tabs
                   whileHover={{ y: -3, scale: 1.1, backgroundColor: "rgba(255,255,255,0.2)" }}
                   className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center transition-colors"
                 >
