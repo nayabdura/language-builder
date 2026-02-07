@@ -116,7 +116,7 @@ const CertificateCard = ({ cert, index }: { cert: Certificate; index: number }) 
 // --- Main Component ---
 export default function StudentCertificates() {
   // Extract video ID from: https://youtu.be/m_SRL_zDMJU
-  const videoId = "m_SRL_zDMJU"; 
+  const videoId = "7pw_WV1aD2I"; 
 
   return (
     <section className="bg-white mx-auto px-6 py-20 font-sans">
