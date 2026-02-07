@@ -18,8 +18,13 @@ const testimonials = [
   { id: 3, name: "Dr. Khalil", role: "Parent", content: "Exceptional learning support for my child at The Gems School Dubai. Interactive sessions led to significant improvement." },
   { id: 4, name: "Sarah Ahmed", role: "O Levels Parent", content: "The structured approach to O Level English was exactly what my daughter needed. The mock exams were a game changer." },
   { id: 5, name: "Mrs. Hameed", role: "Karachi", content: "I was worried about online classes, but the engagement level is higher than physical school! Breakout sessions are very well managed." },
-  { id: 6, name: "Taimoor Khan", role: "IGCSE Student", content: "Science concepts were always hard, but the visual way Language Builders explains them made it click instantly." }
+  { id: 6, name: "Taimoor Khan", role: "IGCSE Student", content: "Science concepts were always hard, but the visual way Language Builders explains them made it click instantly." },
+  { id: 7, name: "Homeschooling Mom", role: "Parent", content: "I had a really good experience, Alhamdulillah. I've seen a major improvement in my son's speaking skills within just 2-3 months. The teacher is kind, patient, dedicated and passionate about teaching, with a strong grasp of the subject" },
+  { id: 8, name: "Mariam Tosif's Mother", role: "Parent", content: "Bravo 👏!!!!! the teacher helping the kids by increasing their vocabulary, power of expressions is built up in my kids and I am personally satisfied and blown away by the efforts put in to make the children great communicators. THANKS 😊for all the efforts and you really make even the most  boring things a fun to learn.... ❣️" },
+  { id: 9, name: "Faiza, Kentucky", role: "Parent", content: "Working with the Language Builders teacher for English and Penn Foster has been a very positive experience for my two daughters. The lessons are well-structured and focused on building strong reading, writing, and language skills. I’ve seen a clear improvement in their confidence and understanding, which is very reassuring as a working parent." },
+  { id: 10, name: "Reema , Australia.", role: "Parent", content: "My experience with Language builders has been excellent. The teacher is very easy to communicate to and keeps me updated about regular progress. She connects very well with my primary school daughter and utilizes innovative technology for homework and teaching which others don’t use. I would highly recommend language builders!" },
 ];
+
 
 // Create infinite list: [Clone] [Original] [Clone]
 const infiniteItems = [...testimonials, ...testimonials, ...testimonials];
